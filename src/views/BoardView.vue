@@ -4,6 +4,6 @@ import ColumnItem from '@/components/ColumnItemComponent/ColumnItem.vue'
 </script>
 
 <template>
-<CardItem></CardItem>
-<ColumnItem></ColumnItem>
+
+<ColumnItem msg="пиздос"></ColumnItem>
 </template>
