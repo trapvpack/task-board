@@ -1,11 +1,14 @@
 .card{
+    background-color: rgb(22, 27, 34);
+    min-width: 313px;
     width: 330px;
-    height: 74px;
+    min-height: 74px;
     border-radius: 6px;
     border-color: rgb(33, 38, 45);
     border-width: 1px;
     border-style: solid;
     margin-bottom: 8px;
+    
     &__id{
 
     }
@@ -14,4 +17,10 @@
 
     }
 
+}
+
+.card:hover{
+    border-color: rgb(48, 54, 61);
+    border-width: 0.1px;
+    cursor: grab;
 }

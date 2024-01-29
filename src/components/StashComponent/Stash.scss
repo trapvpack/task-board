@@ -1,0 +1,38 @@
+.stash{
+    width: 1080px;
+    height: 1920px;
+    display: flex;
+    justify-content: start;
+    
+    &__column{
+        flex: 1 1 auto;
+        height: 715px;
+        min-width: 1920px;
+        padding: 8px 16px 8px 16px;
+        overflow-y: hidden;
+        position: relative;
+        display: flex;
+        background-color: rgb(13, 17, 23);
+    }
+
+    &__add-button{
+        border-radius: 6px;
+        border-color: rgb(33, 38, 45);
+        border-width: 1px;
+        border-style: solid;
+        display: flex;    
+        align-items: center;                            
+        padding: 8px 16px;
+        font-size: 14px;
+        color: rgb(125, 133, 144);
+        width: 34px;
+        height: 28px;
+        background-color: rgb(22, 27, 34);
+        justify-content: center;
+    }
+    &__add-button:hover{
+        border-color: rgb(48, 54, 61);
+        border-width: 0.1px;        
+        cursor: pointer;
+    }
+}
