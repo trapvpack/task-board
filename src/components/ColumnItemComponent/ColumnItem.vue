@@ -3,7 +3,7 @@
 import CardItem from '@/components/CardItemComponent/CardItem.vue'
 
 defineProps<{
-    msg?: string
+    column_name?: string
 }>()
 
 </script>

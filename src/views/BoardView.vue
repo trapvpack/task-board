@@ -5,5 +5,5 @@ import ColumnItem from '@/components/ColumnItemComponent/ColumnItem.vue'
 
 <template>
 
-<ColumnItem msg="пиздос"></ColumnItem>
+<ColumnItem column_name="Колонка"></ColumnItem>
 </template>
