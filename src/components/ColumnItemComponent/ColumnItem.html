@@ -1,21 +1,22 @@
 <div class="column">
 
-    <h3 class="column__name" >
-        {{stash.columnName}}
-    </h3>
+  <h3 class="column__name">
+    {{ column.columnName }}
+  </h3>
 
-    <div class="column__card-stash">
-
-        <CardItem card_name="рэп" card_id=" не рэп" card_executor="рэп3"></CardItem>
-
-        
-         
-        
-
+  <div class="column__card-stash">
+    <div class="column__card-stash-wrapper" v-for="card in cards">
+      <CardItem
+        v-if="card.columnId === column.id"
+        :key="card.id" :card="card"
+        draggable="true"
+        @dragstart="onDragStart($event, )"
+      ></CardItem>
     </div>
+  </div>
 
-    <button class="column__new-card-button">
-            Добавить карточку
-    </button>
+  <button class="column__new-card-button" @click="addCardButtonIsClicked">
+    Добавить карточку
+  </button>
+
 </div>
-

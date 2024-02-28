@@ -1,4 +1,4 @@
-.stash{
+ .stash{
     width: 1080px;
     height: 1920px;
     display: flex;
@@ -21,7 +21,7 @@
         border-width: 1px;
         border-style: solid;
         display: flex;
- align-items: center;
+        align-items: center;
         padding: 8px 16px;
         font-size: 14px;
         color: rgb(125, 133, 144);
@@ -34,7 +34,7 @@
 
     &__overlay{
         position: fixed;
-        inset: 0px;
+        inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -45,8 +45,6 @@
     &__new-column{
         visibility: hidden;
         display: flex;
-        position: absolute;
-        margin-left: 43%;
         flex-direction: column;
         background-color: rgb(22, 27, 34);
         width: 320px;
@@ -60,13 +58,18 @@
     &__new-column-close{
         border-radius: 4px;
         background: transparent;
-        border: 0px;
+        border: 0;
         vertical-align: middle;
         color: rgb(125, 133, 144);
         padding: 8px;
         align-self: flex-start;
         line-height: normal;
         cursor: pointer;
+    }
+
+    &__new-column-name{
+        color: white;
+        font-weight: 500;
     }
 
     &__new-column-footer{
@@ -106,6 +109,74 @@
         border-color: rgba(240, 246, 252, 0.1);
     }
 
+     &__new-card{
+         visibility: hidden;
+         display: flex;
+         flex-direction: column;
+         background-color: rgb(22, 27, 34);
+         width: 320px;
+         height: 565px;
+         border-radius: 12px;
+         border-color: rgb(33, 38, 45);
+         border-width: 1px;
+         border-style: solid;
+     }
+     &__new-card-close{
+         border-radius: 4px;
+         background: transparent;
+         border: 0;
+         vertical-align: middle;
+         color: rgb(125, 133, 144);
+         padding: 8px;
+         align-self: flex-start;
+         line-height: normal;
+         cursor: pointer;
+     }
+     &__new-card-name{
+         color: white;
+         font-weight: 500;
+     }
+
+     &__new-card-name-area{
+         border-radius: 6px;
+         border-width: 1px;
+         border-style: solid;
+         line-height: 20px;
+         color: rgb(230, 237, 243);
+         vertical-align: middle;
+         background-color: rgb(13, 17, 23);
+         outline: none;
+         align-items: stretch;
+         display: flex;
+         border-color: rgb(33, 38, 45);
+     }
+
+     &__new-card-footer{
+         padding: 16px 0;
+     }
+
+     &__new-card-button-footer{
+         padding: 16px ;
+         display: flex;
+         justify-content: center;
+         font-family: inherit;
+         font-weight: 500;
+         font-size: 14px;
+         cursor: pointer;
+         align-items: center;
+         height: 32px;
+         width: 50px;
+         color: rgb(255, 255, 255);
+         background-color: rgb(35, 134, 54);
+         border-radius: 6px;
+         border-width: 1px;
+         border-style: solid;
+         border-color: rgba(240, 246, 252, 0.1);
+     }
+     &__new-card-close:hover{
+         background-color: rgb(48, 54, 61);
+     }
+
     &__new-column-close:hover{
         background-color: rgb(48, 54, 61);
     }
@@ -114,4 +185,5 @@
         border-color: rgb(48, 54, 61);
         border-width: 0.1px;
     }
+
 }

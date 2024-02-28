@@ -2,17 +2,15 @@
 import CardItem from '@/components/CardItemComponent/CardItem.vue'
 
 defineProps<{
-    card_id?: int
-    card_name?: string
-    card_executor?: string
+  card: {
+    type: Array<any>
+    required: true
+  }
 }>()
-
 </script>
 
-<template src ="./CardItem.html">
-
-</template>
+<template src="./CardItem.html"></template>
 
 <style>
-@import "CardItem.scss";
+@import 'CardItem.scss';
 </style>
