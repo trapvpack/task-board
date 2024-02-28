@@ -5,6 +5,6 @@
 <template>
 
     <Stash columns=""></Stash>
-      
+
 </template>
 

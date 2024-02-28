@@ -4,15 +4,19 @@
     {{ column.columnName }}
   </h3>
 
-  <div class="column__card-stash">
-    <div class="column__card-stash-wrapper" v-for="card in cards">
-      <CardItem
-        v-if="card.columnId === column.id"
-        :key="card.id" :card="card"
-        draggable="true"
-        @dragstart="onDragStart($event, )"
-      ></CardItem>
-    </div>
+  <div class="column__card-stash"
+       @drop="onDrop($event, column.id)"
+       @dragover.prevent
+       @dragenter.prevent>
+
+    <CardItem
+      :cards="cards"
+      v-for="card in cards.filter(card => card.columnId === column.id)"
+      :key="card.id" :card="card"
+      draggable="true"
+      @dragstart="onDragStart($event, card)"
+    ></CardItem>
+
   </div>
 
   <button class="column__new-card-button" @click="addCardButtonIsClicked">

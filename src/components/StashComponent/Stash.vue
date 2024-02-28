@@ -8,6 +8,12 @@ const columns = ref([
   { id: 3, columnName: 'кол3' }
 ])
 
+const cards = ref([
+  { id: 1, cardName: 'card1', cardExecutor: 'name1', columnId: 1 },
+  { id: 2, cardName: 'card2', cardExecutor: 'name2', columnId: 2 },
+  { id: 3, cardName: 'card3', cardExecutor: 'name3', columnId: 3 }
+])
+
 const columnName = ref('')
 
 const newColumnOnSubmit = () => {

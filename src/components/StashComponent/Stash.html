@@ -2,8 +2,11 @@
 
   <div class="stash__column">
 
-    <ColumnItem v-for="column in columns"
-                :key="column.id" :column="column" @addCardButtonIsClicked="handleAddCardButtonIsClicked">
+    <ColumnItem
+      :cards="cards"
+      v-for="column in columns"
+      :key="column.id" :column="column"
+      @addCardButtonIsClicked="handleAddCardButtonIsClicked">
     </ColumnItem>
 
     <button class="stash__add-button" @click="showColumnDialog">

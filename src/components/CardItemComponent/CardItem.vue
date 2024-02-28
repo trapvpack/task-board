@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import CardItem from '@/components/CardItemComponent/CardItem.vue'
+import { defineProps } from 'vue'
 
 defineProps<{
   card: {
-    type: Array<any>
+    type: Array<string>
     required: true
   }
 }>()

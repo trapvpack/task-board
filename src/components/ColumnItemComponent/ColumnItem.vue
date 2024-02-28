@@ -1,24 +1,38 @@
 <script setup lang="ts">
 import CardItem from '@/components/CardItemComponent/CardItem.vue'
-import { ref } from 'vue'
+import { ref, defineProps } from 'vue'
 
-const emit = defineEmits(['addCardButtonIsClicked'])
+const emit = defineEmits(['addCardButtonIsClicked', 'cardIsAdded'])
 const addCardButtonIsClicked = () => {
   emit('addCardButtonIsClicked')
 }
 
-const cards = ref([
-  { id: 1, cardName: 'card1', cardExecutor: 'name1', columnId: 1 },
-  { id: 1, cardName: 'card2', cardExecutor: 'name2', columnId: 2 },
-  { id: 1, cardName: 'card3', cardExecutor: 'name3', columnId: 3 }
-])
-
-defineProps<{
+const props = defineProps<{
   column: {
-    type: Array<any>
+    type: Array<string>
+    required: true
+  }
+  cards: {
+    type: Array<string>
     required: true
   }
 }>()
+
+let cards = ref(props.cards)
+
+const onDragStart = (e: DragEvent, card: typeof CardItem): void => {
+  e.dataTransfer!.dropEffect = 'move'
+  e.dataTransfer!.effectAllowed = 'move'
+  e.dataTransfer?.setData('cardId', card.id.toString())
+}
+
+const onDrop = (e: DragEvent, targetColumnId: number): void => {
+  const cardId = parseInt(e.dataTransfer!.getData('cardId'))
+  cards.value = cards.value.map((card) => {
+    if (card.id === cardId) card.columnId = targetColumnId
+    return card
+  })
+}
 </script>
 
 <template src="./ColumnItem.html"></template>
