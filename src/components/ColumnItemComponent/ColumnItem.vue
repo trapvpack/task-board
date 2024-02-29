@@ -7,16 +7,16 @@ const addCardButtonIsClicked = () => {
   emit('addCardButtonIsClicked')
 }
 
-const props = defineProps<{
+const props = defineProps({
   column: {
-    type: Array<string>
+    type: Array<string>,
     required: true
-  }
+  },
   cards: {
-    type: Array<string>
+    type: Array<typeof CardItem>,
     required: true
   }
-}>()
+})
 
 let cards = ref(props.cards)
 
