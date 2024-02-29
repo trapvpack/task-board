@@ -14,28 +14,57 @@ const cards = ref([
   { id: 3, cardName: 'card3', cardExecutor: 'name3', columnId: 3 }
 ])
 
-const columnName = ref('')
+const newColumnName = ref('')
+const newCardName = ref('')
+const newCardExecutor = ref('')
+const currentColumnId = ref<any>(null)
 
 const newColumnOnSubmit = () => {
   const columnData = {
-    text: columnName.value
+    newColumnName: newColumnName.value
   }
-  if (columnData.text) {
+  if (columnData.newColumnName) {
     handleColumnAdded(columnData)
-    columnName.value = ''
+    newColumnName.value = ''
+    closeColumnDialog()
   }
-  closeColumnDialog()
+}
+
+const handleAddCardButtonIsClicked = (newColumnId: number) => {
+  currentColumnId.value = newColumnId
+  showCardDialog()
+}
+
+const handleCardAdded = (cardData: any) => {
+  cards.value.push({
+    id: cardData.newId,
+    cardName: cardData.newCardName,
+    cardExecutor: cardData.newCardExecutor,
+    columnId: cardData.newColumnId
+  })
+  console.log(cardData)
+}
+
+const newCardOnSubmit = () => {
+  const cardData = {
+    newId: generateUniqueId(),
+    newCardName: newCardName.value,
+    newCardExecutor: newCardExecutor.value,
+    newColumnId: currentColumnId.value
+  }
+  if (cardData.newCardName && cardData.newCardExecutor) {
+    handleCardAdded(cardData)
+    newCardName.value = ''
+    newCardExecutor.value = ''
+    closeCardDialog()
+  }
 }
 
 const handleColumnAdded = (columnData: any) => {
   columns.value.push({
     id: generateUniqueId(),
-    columnName: columnData.text
+    columnName: columnData.newColumnName
   })
-}
-
-const handleAddCardButtonIsClicked = () => {
-  showCardDialog()
 }
 
 const generateUniqueId = () => {
@@ -54,7 +83,7 @@ const closeColumnDialog = () => {
   const overlay: HTMLElement | null = document.querySelector('.stash__overlay')
   dialog?.style.setProperty('visibility', 'hidden')
   overlay?.style.setProperty('visibility', 'hidden')
-  columnName.value = ''
+  newColumnName.value = ''
 }
 
 const showCardDialog = () => {

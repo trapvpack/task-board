@@ -6,7 +6,7 @@
       :cards="cards"
       v-for="column in columns"
       :key="column.id" :column="column"
-      @addCardButtonIsClicked="handleAddCardButtonIsClicked">
+      @addCardButtonIsClicked="handleAddCardButtonIsClicked(column.id)">
     </ColumnItem>
 
     <button class="stash__add-button" @click="showColumnDialog">
@@ -34,7 +34,7 @@
       <span class="stash__new-column-name">
             Название колонки
       </span>
-      <input type="text" class="stash__new-column-name-area" v-model="columnName">
+      <input type="text" class="stash__new-column-name-area" v-model="newColumnName">
       <div class="stash__new-column-footer">
         <button class="stash__new-column-button">
           Save
@@ -54,11 +54,11 @@
       <span class="stash__new-card-name">
                      Название карточки
               </span>
-      <input type="text" class="stash__new-card-name-area" v-model="text">
+      <input type="text" name="newCardName" class="stash__new-card-name-area" v-model="newCardName">
       <span class="stash__new-card-name">
                      Исполнитель карточки
               </span>
-      <input type="text" class="stash__new-card-name-area" v-model="text">
+      <input type="text" class="stash__new-card-name-area" v-model="newCardExecutor">
 
       <div class="stash__new-card-footer">
         <button class="stash__new-card-button-footer">

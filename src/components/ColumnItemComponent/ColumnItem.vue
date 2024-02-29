@@ -24,6 +24,7 @@ const onDragStart = (e: DragEvent, card: typeof CardItem): void => {
   e.dataTransfer!.dropEffect = 'move'
   e.dataTransfer!.effectAllowed = 'move'
   e.dataTransfer?.setData('cardId', card.id.toString())
+  console.log(e.dataTransfer)
 }
 
 const onDrop = (e: DragEvent, targetColumnId: number): void => {

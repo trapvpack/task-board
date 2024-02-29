@@ -1,10 +1,7 @@
 <script setup lang="ts">
-    import Stash from '@/components/StashComponent/Stash.vue'
+import Stash from '@/components/StashComponent/StashItem.vue'
 </script>
 
 <template>
-
-    <Stash columns=""></Stash>
-
+  <Stash columns=""></Stash>
 </template>
-
