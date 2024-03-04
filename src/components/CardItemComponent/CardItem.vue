@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
+import { useStore } from 'vuex'
 
+const store = useStore()
 defineProps<{
   card: {
     type: Array<string>

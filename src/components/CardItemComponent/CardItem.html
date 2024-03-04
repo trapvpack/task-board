@@ -10,5 +10,12 @@
   <div class="card__executor">
     {{ card.cardExecutor }}
   </div>
- 
+  <button class="card__delete"
+          @click="$emit('deleteCard')">
+    Удалить
+  </button>
+  <button class="card__edit"
+          @click="$emit('editCard')">
+    Редактировать
+  </button>
 </div>

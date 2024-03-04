@@ -4,7 +4,13 @@ import { ref, defineProps } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
-const emit = defineEmits(['addCardButtonIsClicked', 'cardIsAdded', 'onDrop'])
+const emit = defineEmits([
+  'addCardButtonIsClicked',
+  'cardIsAdded',
+  'onDrop',
+  'deleteCard',
+  'editCard'
+])
 const addCardButtonIsClicked = () => {
   emit('addCardButtonIsClicked')
 }
@@ -26,6 +32,13 @@ const props = defineProps({
     required: true
   }
 })
+
+const deleteCardEmiter = () => {
+  emit('deleteCard')
+}
+const editCardEmiter = () => {
+  emit('editCard')
+}
 
 const onDragStart = (e: DragEvent, card: Card): void => {
   e.dataTransfer!.dropEffect = 'move'

@@ -20,6 +20,8 @@ const cards = ref([
 const newColumnName = ref('')
 const newCardName = ref('')
 const newCardExecutor = ref('')
+const editCardName = ref('')
+const editCardExecutor = ref('')
 const currentColumnId = ref<any>(null)
 
 const newColumnOnSubmit = () => {
@@ -38,9 +40,15 @@ const handleAddCardButtonIsClicked = (newColumnId: number) => {
   showCardDialog()
 }
 
-/*const cardId = ref<number>()*/
+const handleEditingCard = (id: number) => {
+  showCardEdit(id)
+}
+
+const handleDeleteCard = (id: number) => {
+  cards.value = cards.value.filter((card) => card.id !== id)
+}
+
 const handleOnDrop = (cardId: number, targetColumnId: number): void => {
-  console.log(cardId, targetColumnId)
   cards.value = cards.value.map((card) => {
     if (card.id === cardId) card.columnId = targetColumnId
     return card
@@ -56,6 +64,25 @@ const handleCardAdded = (cardData: any) => {
   })
 }
 
+const handleCardEdited = (cardData: any, id: number) => {
+  const index = cards.value.findIndex((card) => card.id === id)
+  cards.value = cards.value.map((card) => {
+    if (card.id === id) {
+      card.id = cardData.editId
+      card.cardName = cardData.editCardName
+      card.cardExecutor = cardData.editCardExecutor
+      card.columnId = cardData.editColumnId
+    }
+    return card
+  })
+}
+const handleColumnAdded = (columnData: any) => {
+  columns.value.push({
+    id: generateUniqueId(),
+    columnName: columnData.newColumnName
+  })
+}
+
 const newCardOnSubmit = () => {
   const cardData = {
     newId: generateUniqueId(),
@@ -67,15 +94,22 @@ const newCardOnSubmit = () => {
     handleCardAdded(cardData)
     newCardName.value = ''
     newCardExecutor.value = ''
-    closeCardDialog()
+    closeNewCardDialog()
   }
 }
-
-const handleColumnAdded = (columnData: any) => {
-  columns.value.push({
-    id: generateUniqueId(),
-    columnName: columnData.newColumnName
-  })
+const editCardOnSubmit = () => {
+  const editCardData = {
+    editId: store.state.cardOnEdit,
+    editCardName: editCardName.value,
+    editCardExecutor: editCardExecutor.value,
+    editColumnId: store.state.columnIdOnEdit
+  }
+  if (editCardData.editCardName && editCardData.editCardExecutor) {
+    handleCardEdited(editCardData, store.state.cardOnEdit)
+    editCardName.value = ''
+    editCardExecutor.value = ''
+    closeEditCardDialog()
+  }
 }
 
 const generateUniqueId = () => {
@@ -104,11 +138,36 @@ const showCardDialog = () => {
   overlay?.style.setProperty('visibility', 'visible')
 }
 
-const closeCardDialog = () => {
+const closeNewCardDialog = () => {
   const dialog: HTMLElement | null = document.querySelector('.stash__new-card')
   const overlay: HTMLElement | null = document.querySelector('.stash__overlay')
   dialog?.style.setProperty('visibility', 'hidden')
   overlay?.style.setProperty('visibility', 'hidden')
+  newCardName.value = ''
+  newCardExecutor.value = ''
+}
+
+const closeEditCardDialog = () => {
+  const dialog: HTMLElement | null = document.querySelector('.stash__edit-card')
+  const overlay: HTMLElement | null = document.querySelector('.stash__overlay')
+  dialog?.style.setProperty('visibility', 'hidden')
+  overlay?.style.setProperty('visibility', 'hidden')
+  editCardName.value = ''
+  editCardExecutor.value = ''
+}
+
+const showCardEdit = (id: number) => {
+  const dialog: HTMLElement | null = document.querySelector('.stash__edit-card')
+  const overlay: HTMLElement | null = document.querySelector('.stash__overlay')
+  cards.value = cards.value.map((card) => {
+    if (card.id === id) {
+      editCardName.value = card.cardName
+      editCardExecutor.value = card.cardExecutor
+    }
+    return card
+  })
+  dialog?.style.setProperty('visibility', 'visible')
+  overlay?.style.setProperty('visibility', 'visible')
 }
 </script>
 
