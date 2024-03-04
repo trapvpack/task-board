@@ -1,10 +1,19 @@
 <script setup lang="ts">
 import CardItem from '@/components/CardItemComponent/CardItem.vue'
 import { ref, defineProps } from 'vue'
+import { useStore } from 'vuex'
 
-const emit = defineEmits(['addCardButtonIsClicked', 'cardIsAdded'])
+const store = useStore()
+const emit = defineEmits(['addCardButtonIsClicked', 'cardIsAdded', 'onDrop'])
 const addCardButtonIsClicked = () => {
   emit('addCardButtonIsClicked')
+}
+
+interface Card {
+  id: number
+  cardName: string
+  cardExecutor: string
+  columnId: number
 }
 
 const props = defineProps({
@@ -13,26 +22,15 @@ const props = defineProps({
     required: true
   },
   cards: {
-    type: Array<typeof CardItem>,
+    type: Array<Card>,
     required: true
   }
 })
 
-let cards = ref(props.cards)
-
-const onDragStart = (e: DragEvent, card: typeof CardItem): void => {
+const onDragStart = (e: DragEvent, card: Card): void => {
   e.dataTransfer!.dropEffect = 'move'
   e.dataTransfer!.effectAllowed = 'move'
-  e.dataTransfer?.setData('cardId', card.id.toString())
-  console.log(e.dataTransfer)
-}
-
-const onDrop = (e: DragEvent, targetColumnId: number): void => {
-  const cardId = parseInt(e.dataTransfer!.getData('cardId'))
-  cards.value = cards.value.map((card) => {
-    if (card.id === cardId) card.columnId = targetColumnId
-    return card
-  })
+  store.state.cardId = card.id
 }
 </script>
 

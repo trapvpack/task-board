@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import ColumnItem from '@/components/ColumnItemComponent/ColumnItem.vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 const columns = ref([
   { id: 1, columnName: 'Column1' },
@@ -35,6 +38,15 @@ const handleAddCardButtonIsClicked = (newColumnId: number) => {
   showCardDialog()
 }
 
+/*const cardId = ref<number>()*/
+const handleOnDrop = (cardId: number, targetColumnId: number): void => {
+  console.log(cardId, targetColumnId)
+  cards.value = cards.value.map((card) => {
+    if (card.id === cardId) card.columnId = targetColumnId
+    return card
+  })
+}
+
 const handleCardAdded = (cardData: any) => {
   cards.value.push({
     id: cardData.newId,
@@ -42,7 +54,6 @@ const handleCardAdded = (cardData: any) => {
     cardExecutor: cardData.newCardExecutor,
     columnId: cardData.newColumnId
   })
-  console.log(cardData)
 }
 
 const newCardOnSubmit = () => {

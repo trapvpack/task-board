@@ -1,20 +1,22 @@
-<div class="column">
+<div class="column"
+     @drop="$emit('onDrop', store.state.cardId)"
+
+     @dragover.prevent
+     @dragenter.prevent>
 
   <h3 class="column__name">
     {{ column.columnName }}
   </h3>
 
-  <div class="column__card-stash"
-       @drop="onDrop($event, column.id)"
-       @dragover.prevent
-       @dragenter.prevent>
+  <div class="column__card-stash">
 
     <CardItem
       :cards="cards"
-      v-for="card in cards.filter(card => card.columnId === column.id)"
+      v-for="card in props.cards.filter(card => card.columnId === column.id)"
       :key="card.id" :card="card"
       draggable="true"
       @dragstart="onDragStart($event, card)"
+
     ></CardItem>
 
   </div>

@@ -6,7 +6,9 @@
       :cards="cards"
       v-for="column in columns"
       :key="column.id" :column="column"
-      @addCardButtonIsClicked="handleAddCardButtonIsClicked(column.id)">
+      @addCardButtonIsClicked="handleAddCardButtonIsClicked(column.id)"
+      @onDrop="handleOnDrop(store.state.cardId, column.id)">
+
     </ColumnItem>
 
     <button class="stash__add-button" @click="showColumnDialog">
