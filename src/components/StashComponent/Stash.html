@@ -1,0 +1,77 @@
+<div class="stash">
+
+  <div class="stash__column">
+
+    <ColumnItem
+      :cards="cards"
+      v-for="column in columns"
+      :key="column.id" :column="column"
+      @addCardButtonIsClicked="handleAddCardButtonIsClicked(column.id)"
+      @onDrop="handleOnDrop(store.state.cardId, column.id)"
+      @deleteCard="handleDeleteCard(store.state.cardOnDelete)"
+      @editCard="handleEditingCard(store.state.cardOnEdit)">
+    </ColumnItem>
+
+    <button class="stash__add-button" @click="changeStateColumnDialog('visible')">
+    <img src="@/assets/SvgElements/AddButton.svg">
+    </button>
+
+  </div>
+
+  <div class="stash__overlay">
+    <form class="stash__new-column" @submit.prevent="newColumnOnSubmit">
+      <button class="stash__new-column-close" @click="changeStateColumnDialog('hidden')">
+        <img src="@/assets/SvgElements/CloseButton.svg">
+      </button>
+      <span class="stash__new-column-name">
+            Название колонки
+      </span>
+      <input type="text" class="stash__new-column-name-area" v-model="newColumnName">
+      <div class="stash__new-column-footer">
+        <button class="stash__new-column-button">
+          Save
+        </button>
+      </div>
+    </form>
+
+    <form class="stash__new-card" @submit.prevent="newCardOnSubmit">
+      <button class="stash__new-card-close" @click=" changeStateNewCardDialog('hidden')">
+        <img src="@/assets/SvgElements/CloseButton.svg">
+      </button>
+      <span class="stash__new-card-name">
+                     Название карточки
+              </span>
+      <input type="text" value="Name" class="stash__new-card-name-area" v-model="newCardName">
+      <span class="stash__new-card-name">
+                     Исполнитель карточки
+              </span>
+      <input type="text" value="Exec" class="stash__new-card-exec-area" v-model="newCardExecutor">
+
+      <div class="stash__new-card-footer">
+        <button class="stash__new-card-button-footer">
+          Save
+        </button>
+      </div>
+    </form>
+
+    <form class="stash__edit-card" @submit.prevent="editCardOnSubmit">
+      <button class="stash__edit-card-close" @click="closeEditCardDialog">
+        <img src="@/assets/SvgElements/CloseButton.svg">
+      </button>
+      <span class="stash__edit-card-name">
+                     Название карточки
+              </span>
+      <input type="text" class="stash__edit-card-name-area" v-model="editCardName">
+      <span class="stash__edit-card-name">
+                     Исполнитель карточки
+              </span>
+      <input type="text" class="stash__edit-card-exec-area" v-model="editCardExecutor">
+
+      <div class="stash__edit-card-footer">
+        <button class="stash__edit-card-button-footer">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
