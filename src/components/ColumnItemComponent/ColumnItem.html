@@ -11,15 +11,12 @@
   <div class="column__card-stash">
 
     <CardItem
-      :cards="cards"
       v-for="card in props.cards.filter(card => card.columnId === column.id)"
       :key="card.id" :card="card"
       draggable="true"
       @dragstart="onDragStart($event, card)"
       @deleteCard="deleteCardEmiter(store.state.cardOnDelete = card.id)"
-      @editCard="editCardEmiter(store.state.cardOnEdit = card.id, store.state.columnIdOnEdit = card.columnId)"
-    >
-
+      @editCard="editCardEmiter(store.state.cardOnEdit = card.id, store.state.columnIdOnEdit = card.columnId)">
     </CardItem>
 
   </div>

@@ -15,16 +15,21 @@ const addCardButtonIsClicked = () => {
   emit('addCardButtonIsClicked')
 }
 
-interface Card {
+export interface Card {
   id: number
   cardName: string
   cardExecutor: string
   columnId: number
 }
+export interface Column {
+  id: number
+  columnName: string
+}
+
 
 const props = defineProps({
   column: {
-    type: Array<string>,
+    type: Array<Column>,
     required: true
   },
   cards: {

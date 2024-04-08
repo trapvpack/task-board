@@ -31,13 +31,13 @@ const newColumnOnSubmit = () => {
   if (columnData.newColumnName) {
     handleColumnAdded(columnData)
     newColumnName.value = ''
-    closeColumnDialog()
+    changeStateColumnDialog("hidden")
   }
 }
 
 const handleAddCardButtonIsClicked = (newColumnId: number) => {
   currentColumnId.value = newColumnId
-  showCardDialog()
+  changeStateNewCardDialog('visible')
 }
 
 const handleEditingCard = (id: number) => {
@@ -94,7 +94,7 @@ const newCardOnSubmit = () => {
     handleCardAdded(cardData)
     newCardName.value = ''
     newCardExecutor.value = ''
-    closeNewCardDialog()
+    changeStateNewCardDialog('hidden')
   }
 }
 const editCardOnSubmit = () => {
@@ -116,35 +116,27 @@ const generateUniqueId = () => {
   return Math.floor(Math.random() * 1000000)
 }
 
-const showColumnDialog = () => {
+const changeStateColumnDialog = (state: string) => {
   const dialog: HTMLElement | null = document.querySelector('.stash__new-column')
   const overlay: HTMLElement | null = document.querySelector('.stash__overlay')
-  dialog?.style.setProperty('visibility', 'visible')
-  overlay?.style.setProperty('visibility', 'visible')
+  dialog?.style.setProperty('visibility', state)
+  overlay?.style.setProperty('visibility', state)
+  if (state === "hidden")
+  {
+    newColumnName.value = ''
+  }
 }
 
-const closeColumnDialog = () => {
-  const dialog: HTMLElement | null = document.querySelector('.stash__new-column')
-  const overlay: HTMLElement | null = document.querySelector('.stash__overlay')
-  dialog?.style.setProperty('visibility', 'hidden')
-  overlay?.style.setProperty('visibility', 'hidden')
-  newColumnName.value = ''
-}
-
-const showCardDialog = () => {
+const changeStateNewCardDialog = (state: string) => {
   const dialog: HTMLElement | null = document.querySelector('.stash__new-card')
   const overlay: HTMLElement | null = document.querySelector('.stash__overlay')
-  dialog?.style.setProperty('visibility', 'visible')
-  overlay?.style.setProperty('visibility', 'visible')
-}
-
-const closeNewCardDialog = () => {
-  const dialog: HTMLElement | null = document.querySelector('.stash__new-card')
-  const overlay: HTMLElement | null = document.querySelector('.stash__overlay')
-  dialog?.style.setProperty('visibility', 'hidden')
-  overlay?.style.setProperty('visibility', 'hidden')
-  newCardName.value = ''
-  newCardExecutor.value = ''
+  dialog?.style.setProperty('visibility', state)
+  overlay?.style.setProperty('visibility', state)
+  if (state === "hidden")
+  {
+    newCardName.value = ''
+    newCardExecutor.value = ''
+  }
 }
 
 const closeEditCardDialog = () => {
